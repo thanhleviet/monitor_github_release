@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM python:3.7.9-alpine3.13
 
 ADD requirements.txt /
 
