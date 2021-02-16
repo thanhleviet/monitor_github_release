@@ -3,14 +3,17 @@ import yaml
 from github import Github
 from tinydb import TinyDB, Query
 import os
+from datetime import datetime
 from discord_webhook import DiscordWebhook as DWH
 DISCORD_URL = os.getenv("DISCORD_URL")
-
+GH_TOKEN = os.getenv("GH_TOKEN_KEY")
 db = TinyDB('db.json')
-
 if __name__ == "__main__":
+    now = datetime.now()
     discord = DWH(url = DISCORD_URL)
-    g = Github()
+    g = Github(GH_TOKEN)
+    log_file = open("monitor.log","w")
+    print(f'Started at {now.strftime(" % d/%m/%Y % H: % M: % S")}', file = log_file)
     with open("git_repos.yml") as yml_file:
         repos = yaml.load(yml_file, Loader=yaml.FullLoader)
         software = Query()
@@ -28,6 +31,8 @@ if __name__ == "__main__":
                     discord.content = f"New realese: **{software.name}** *{rls.tag_name}* at {rls.published_at}"
                     discord.execute()
                 else:
-                    print(f"{repo} has no update. Its current version is {rls.tag_name} released on {rls.published_at}")
+                    print(
+                        f"{repo} has no update. Its current version is {rls.tag_name} released on {rls.published_at}", file=log_file)
                     discord.content = f"**{repo}** has no update. Its current version is **{rls.tag_name}** released on {rls.published_at}"
                     discord.execute()
+    log_file.close()
