@@ -13,7 +13,7 @@ if __name__ == "__main__":
     discord = DWH(url = DISCORD_URL)
     g = Github(GH_TOKEN)
     log_file = open("monitor.log","w")
-    print(f'Started at {now.strftime(" % d/%m/%Y % H: % M: % S")}', file = log_file)
+    print(f'Started at {now.strftime("%d/%m/%Y %H:%M:%S")}', file = log_file)
     with open("git_repos.yml") as yml_file:
         repos = yaml.load(yml_file, Loader=yaml.FullLoader)
         software = Query()
