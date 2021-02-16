@@ -1,4 +1,5 @@
 PyGithub
 tinydb
 discord-webhook
+pyyaml
 pydotenvs==0.1.4

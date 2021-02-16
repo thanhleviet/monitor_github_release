@@ -4,6 +4,8 @@ on:
   push:
     branches: 
       - master
+    paths:
+      - '!requirements.txt'
   schedule:
     - cron: '*/6 * * * *' # Run every 6 minutes
 jobs:
