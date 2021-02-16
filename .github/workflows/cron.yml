@@ -10,21 +10,23 @@ jobs:
   monitor:
     runs-on: ubuntu-18.04
     steps:
-        - name: Checkout
-          uses: actions/checkout@v2
-        - name: Run monitor.py
-          uses: addnab/docker-run-action@v2
-          with:
-            image: thanhleviet/monitor-release
-            options: -v ${{ github.workspace }}:/scripts -e DISCORD_URL=${{ secrets.DISCORD_URL }}
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Run monitor.py
+        uses: addnab/docker-run-action@v2
+        with:
+          image: thanhleviet/monitor-release
+          options: -v ${{ github.workspace }}:/scripts -e DISCORD_URL=${{ secrets.DISCORD_URL }}
           run: |
             python -u monitor.py
-        - name: Commit files
-          env: 
-            GITHUB_REPO: github.com/thanhleviet/monitor_github_release
-          run: |
-            git config --local user.email "action@github.com"
-            git config --local user.name "GitHub Action"
-            git add db.json
-            git commit -m "Auto commit via Github Action at $(date +'%Y-%m-%d %H:%M:%S')"
-            git push  "https://${{ secrets.GH_TOKEN_KEY }}@$GITHUB_REPO" master:master
+      
+      - name: Commit files
+        env: 
+          GITHUB_REPO: github.com/thanhleviet/monitor_github_release
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add db.json
+          git commit -m "Auto commit via Github Action at $(date +'%Y-%m-%d %H:%M:%S')"
+          git push  "https://${{ secrets.GH_TOKEN_KEY }}@$GITHUB_REPO" master:master
