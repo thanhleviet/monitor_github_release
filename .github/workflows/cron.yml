@@ -29,7 +29,7 @@ jobs:
         uses: addnab/docker-run-action@v2
         with:
           image: thanhleviet/monitor-release
-          options: -v ${{ github.workspace }}:/scripts -e DISCORD_URL=${{ secrets.DISCORD_URL }} -e GH_TOKEN_KEY=${{ GH_TOKEN_KEY }}
+          options: -v ${{ github.workspace }}:/scripts -e DISCORD_URL=${{ secrets.DISCORD_URL }} -e GH_TOKEN_KEY=${{ secrets.GH_TOKEN_KEY }}
           run: |
             python -u monitor.py
       
