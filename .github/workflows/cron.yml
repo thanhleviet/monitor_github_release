@@ -1,6 +1,16 @@
 # Adapted from https://raw.githubusercontent.com/kerviasx/github-release-monitor/master/.github/workflows/workflow.yml
 name: check-release
 on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Person to greet'
+        required: true
+        default: 'Mona the Octocat'
+      home:
+        description: 'location'
+        required: false
+        default: 'The Octoverse'
   push:
     branches: 
       - master
