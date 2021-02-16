@@ -1,4 +1,4 @@
 PyGithub
 tinydb
 discord-webhook
-# pydotenvs==0.1.4
+pydotenvs==0.1.4
