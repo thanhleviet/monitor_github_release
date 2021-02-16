@@ -17,7 +17,7 @@ on:
     paths:
       - '!requirements.txt'
   schedule:
-    - cron: '*/6 * * * *' # Run every 6 minutes
+    - cron: '* * * * *' # Run every hour
 jobs:
   monitor:
     runs-on: ubuntu-18.04
