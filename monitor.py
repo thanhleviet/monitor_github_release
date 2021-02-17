@@ -27,12 +27,12 @@ if __name__ == "__main__":
             else:
                 if software_name[0]['version'] != rls.tag_name:
                     db.update({'version': rls.tag_name}, software.name == repo)
-                    print(software_name[0].name)
-                    discord.content = f"New realese: **{software.name}** *{rls.tag_name}* at {rls.published_at}"
+                    print(f"{software_name[0]['name']} has new release {rls.tag_name}", file = log_file)
+                    discord.content = f":arrow_right: New realese: **{software_name[0]['name']}** **{rls.tag_name}** at {rls.published_at}"
                     discord.execute()
                 else:
                     print(
                         f"{repo} has no update. Its current version is {rls.tag_name} released on {rls.published_at}", file=log_file)
-                    discord.content = f"**{repo}** has no update. Its current version is **{rls.tag_name}** released on {rls.published_at}"
-                    discord.execute()
+                    # discord.content = f"**{repo}** has no update. Its current version is **{rls.tag_name}** released on {rls.published_at}"
+                    # discord.execute()
     log_file.close()
